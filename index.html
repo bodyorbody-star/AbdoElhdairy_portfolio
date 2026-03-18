@@ -64,17 +64,13 @@ h2{margin-bottom:25px;color:#60a5fa;text-shadow:0 0 10px #2563eb,0 0 20px #2563e
 <h2 id="typing"></h2>
 <p id="hero-subtitle">I’m Abdallah Mohammed, a visionary Software Engineer and Python Maestro. I craft stunning, interactive, and responsive websites that elevate businesses, restaurants, and personal projects to a whole new level. With a relentless passion for programming and problem-solving, I turn ideas into elegant digital realities, blending creativity, precision, and innovation.</p>
 
-<!-- Social Buttons with Message -->
+<!-- Social Buttons -->
 <div class="social-buttons">
-  <a href="https://mail.google.com/mail/?view=cm&to=abdomohammed02006@gmail.com&su=Hello&body=أزيك يا بشمهندس عبدالله!" target="_blank" class="social-btn">Email</a>
-  
+  <a href="mailto:abdomohammed02006@gmail.com?subject=Hello&body=أزيك يا بشمهندس عبدالله!" target="_blank" class="social-btn">Email</a>
   <a href="https://wa.me/201114698117?text=أزيك يا بشمهندس عبدالله!" target="_blank" class="social-btn">WhatsApp</a>
-  
-  <a href="https://www.instagram.com/leader200006" target="_blank" class="social-btn" onclick="alert('أزيك يا بشمهندس عبدالله!')">Instagram</a>
-  
-  <a href="https://www.facebook.com/share/1Ghb6NWYQc/" target="_blank" class="social-btn" onclick="alert('أزيك يا بشمهندس عبدالله!')">Facebook</a>
-  
-  <a href="https://www.tiktok.com/@abdo.6.12.2006" target="_blank" class="social-btn" onclick="alert('أزيك يا بشمهندس عبدالله!')">TikTok</a>
+  <a href="https://www.instagram.com/leader200006" target="_blank" class="social-btn">Instagram</a>
+  <a href="https://www.facebook.com/share/1Ghb6NWYQc/" target="_blank" class="social-btn">Facebook</a>
+  <a href="https://www.tiktok.com/@abdo.6.12.2006" target="_blank" class="social-btn">TikTok</a>
 </div>
 </div>
 
@@ -150,7 +146,7 @@ document.getElementById("profile").onclick=function(){
   document.body.appendChild(popup);
 };
 
-// Particles Background
+// Particles
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");let W,H;
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
@@ -163,16 +159,11 @@ draw();
 // Neon Cursor Trail
 const trailCanvas=document.getElementById("trail");
 const tctx=trailCanvas.getContext("2d");
-trailCanvas.width=window.innerWidth;
-trailCanvas.height=window.innerHeight;
+trailCanvas.width=window.innerWidth; trailCanvas.height=window.innerHeight;
 let trailParticles=[];
 window.addEventListener("resize",()=>{trailCanvas.width=window.innerWidth;trailCanvas.height=window.innerHeight;});
 document.addEventListener("mousemove",e=>{trailParticles.push({x:e.clientX,y:e.clientY,alpha:1});});
-function drawTrail(){
-  tctx.clearRect(0,0,trailCanvas.width,trailCanvas.height);
-  trailParticles.forEach((p,i)=>{tctx.fillStyle=`rgba(37,99,235,${p.alpha})`;tctx.beginPath();tctx.arc(p.x,p.y,8,0,Math.PI*2);tctx.fill();p.alpha-=0.03;if(p.alpha<=0) trailParticles.splice(i,1);});
-  requestAnimationFrame(drawTrail);
-}
+function drawTrail(){tctx.clearRect(0,0,trailCanvas.width,trailCanvas.height);trailParticles.forEach((p,i)=>{tctx.fillStyle=`rgba(37,99,235,${p.alpha})`;tctx.beginPath();tctx.arc(p.x,p.y,8,0,Math.PI*2);tctx.fill();p.alpha-=0.03;if(p.alpha<=0) trailParticles.splice(i,1);});requestAnimationFrame(drawTrail);}
 drawTrail();
 
 // 3D profile hover
@@ -195,7 +186,6 @@ if(lang==='ar'){
   document.getElementById("hero-subtitle").innerText="أنا عبد الله محمد، مهندس برمجيات ومطور بايثون ذو رؤية مستقبلية. أصنع مواقع مذهلة وتفاعلية ومتجاوبة ترتقي بالشركات والمطاعم والمشاريع الشخصية لمستوى استثنائي. بشغف لا ينتهي للبرمجة وحل المشكلات، أحول الأفكار إلى واقع رقمي أنيق يجمع بين الإبداع والدقة والابتكار.";
   document.getElementById("aboutTitle").innerText="من أنا";
   document.getElementById("aboutText").innerText="عبد الله محمد طالب علوم حاسب ومطور بايثون بارع، يصنع تجارب ويب استثنائية للشركات والمطاعم والمشاريع الشخصية. معروف بدقته وإبداعه وابتكاره المستمر، يحول المشكلات المعقدة إلى حلول رقمية أنيقة وعالية الأداء. تشمل خبراته بايثون، تطوير الويب، الخوارزميات، واستراتيجيات حل المشكلات المتقدمة.";
-  document.querySelectorAll('.skills span').forEach((el,i)=>{const skillsAr=['بايثون','تطوير الويب','حل المشكلات','الخوارزميات','Git & GitHub'];el.innerText=skillsAr[i];});
 }else{
   document.body.dir="ltr";
   document.getElementById("hero-title").innerText="Abdallah Mohammed";
@@ -203,7 +193,6 @@ if(lang==='ar'){
   document.getElementById("hero-subtitle").innerText="I’m Abdallah Mohammed, a visionary Software Engineer and Python Maestro. I craft stunning, interactive, and responsive websites that elevate businesses, restaurants, and personal projects to a whole new level. With a relentless passion for programming and problem-solving, I turn ideas into elegant digital realities, blending creativity, precision, and innovation.";
   document.getElementById("aboutTitle").innerText="About Me";
   document.getElementById("aboutText").innerText="Abdallah Mohammed is a masterful Computer Science student and Python Developer, shaping exceptional web experiences for businesses, restaurants, and personal projects. Known for precision, creativity, and relentless innovation, he transforms complex problems into elegant, high-performance digital solutions. His expertise spans Python, web development, algorithms, and advanced problem-solving strategies.";
-  document.querySelectorAll('.skills span').forEach((el,i)=>{const skillsEn=['Python','Web Development','Problem Solving','Algorithms','Git & GitHub'];el.innerText=skillsEn[i];});
 }}
 </script>
 
