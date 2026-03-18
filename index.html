@@ -1,126 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdallah Mohammed | Portfolio</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
-body { background:#020617; color:white; overflow-x:hidden; transition:0.3s; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineer | Abdallah Mohammed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #2563eb; --accent: #60a5fa; --bg: #020617; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, sans-serif; }
+        
+        body { background: var(--bg); color:white; overflow-x:hidden; scroll-behavior: smooth; }
 
-/* شاشة اختيار اللغة */
-#language-overlay {
-    position:fixed; inset:0; background:#020617; z-index:9999;
-    display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px;
-}
-.lang-btn {
-    padding:15px 40px; font-size:20px; cursor:pointer; border:none; border-radius:50px;
-    background:linear-gradient(145deg, #2563eb, #60a5fa); color:white; transition:0.3s;
-}
-.lang-btn:hover { transform:scale(1.1); box-shadow:0 0 20px #2563eb; }
+        /* Mouse Follower */
+        #cursor-blur {
+            position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none; z-index: -1; transform: translate(-50%, -50%); transition: 0.1s;
+        }
 
-/* الهيرو سيكشن */
-.hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; }
-#particles { position:absolute; inset:0; z-index:-1; }
-.profile { width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid #2563eb; box-shadow:0 0 30px #2563eb; transition:0.5s; cursor:pointer; }
-h1 { font-size:clamp(32px, 8vw, 55px); color:#60a5fa; margin-top:20px; }
-#typing { font-size:24px; color:#94a3b8; height:30px; margin:10px 0; font-weight:bold; }
-.hero p { max-width:800px; color:#94a3b8; line-height:1.6; margin-bottom:30px; }
+        /* Language Overlay */
+        #language-overlay {
+            position:fixed; inset:0; background:var(--bg); z-index:9999;
+            display:flex; flex-direction:column; justify-content:center; align-items:center;
+        }
+        .lang-btn {
+            padding:18px 50px; font-size:18px; cursor:pointer; border:1px solid var(--primary); border-radius:15px;
+            background: transparent; color:white; margin: 10px; transition:0.4s; font-weight: bold;
+        }
+        .lang-btn:hover { background: var(--primary); box-shadow: 0 0 30px var(--primary); transform: translateY(-5px); }
 
-/* أزرار التواصل الاجتماعي */
-.social-buttons { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-bottom:40px; }
-.social-btn {
-    padding:12px 25px; color:white; text-decoration:none; border-radius:12px;
-    font-size:16px; font-weight:600; display:flex; align-items:center; gap:10px;
-    background:#1e293b; border:1px solid #334155; transition:0.3s;
-}
-.social-btn.email:hover { background:#ea4335; box-shadow:0 0 15px #ea4335; }
-.social-btn.whatsapp:hover { background:#25d366; box-shadow:0 0 15px #25d366; }
-.social-btn.fb:hover { background:#1877f2; box-shadow:0 0 15px #1877f2; }
-.social-btn.insta:hover { background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.social-btn.tiktok:hover { background:#000; box-shadow:0 0 15px #ff0050; border-color:#ff0050; }
+        /* Hero Section */
+        .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; }
+        #bg-canvas { position: absolute; top:0; left:0; width:100%; height:100%; z-index:-2; opacity: 0.35; }
 
-/* المعرض */
-.section { padding:60px 20px; max-width:1100px; margin:auto; text-align:center; }
-.gallery { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; margin-top:30px; }
-.gallery img { width:100%; height:200px; object-fit:cover; border-radius:10px; cursor:pointer; transition:0.3s; }
-.gallery img:hover { transform:scale(1.05); box-shadow:0 5px 15px #2563eb; }
+        .profile-container { position: relative; margin-bottom: 20px; }
+        .profile { 
+            width:180px; height:180px; border-radius:50%; object-fit:cover; 
+            border:4px solid var(--primary); cursor: pointer; transition: 0.5s;
+            filter: drop-shadow(0 0 15px var(--primary));
+        }
+        .profile:hover { transform: scale(1.08); filter: drop-shadow(0 0 25px var(--primary)); }
 
-[dir="rtl"] { text-align: right; }
-[dir="rtl"] .hero, [dir="rtl"] .section { text-align: center; }
-</style>
+        h1 { font-size: clamp(35px, 8vw, 65px); background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        #typing { font-size: 22px; color: var(--accent); margin: 15px 0; font-family: 'Courier New', monospace; min-height: 30px; }
+
+        /* الأزرار وتفاعل الألوان المخصص */
+        .social-buttons { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top: 25px; }
+        .social-btn {
+            padding:12px 24px; color:white; text-decoration:none; border-radius:12px;
+            font-size:14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px); transition: 0.3s; display:flex; align-items:center; gap:8px; font-weight: 600;
+        }
+        
+        .social-btn.whatsapp:hover { background: #25d366 !important; border-color: #25d366; box-shadow: 0 0 20px rgba(37,211,102,0.4); transform: translateY(-3px); }
+        .social-btn.facebook:hover { background: #1877f2 !important; border-color: #1877f2; box-shadow: 0 0 20px rgba(24,119,242,0.4); transform: translateY(-3px); }
+        .social-btn.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important; border-color: transparent; box-shadow: 0 0 20px rgba(220,39,67,0.4); transform: translateY(-3px); }
+        .social-btn.email:hover { background: #ea4335 !important; border-color: #ea4335; box-shadow: 0 0 20px rgba(234,67,53,0.4); transform: translateY(-3px); }
+        .social-btn.tiktok:hover { background: #000 !important; border-color: #ff0050; box-shadow: 0 0 20px rgba(255,0,80,0.4); transform: translateY(-3px); }
+
+        /* Sections */
+        .section { padding:80px 20px; max-width:1100px; margin:auto; opacity: 0; transform: translateY(40px); transition: 1s; }
+        .section.visible { opacity: 1; transform: translateY(0); }
+        .section-title { font-size: 32px; margin-bottom: 40px; text-align: center; color: var(--accent); position: relative; }
+        .section-title::after { content:''; display:block; width:60px; height:3px; background: var(--primary); margin: 15px auto; }
+
+        /* Cards */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .project-card { 
+            background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.05); 
+            padding: 35px; border-radius: 20px; transition: 0.4s;
+        }
+        .project-card:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(15, 23, 42, 0.9); }
+        .project-card i { font-size: 35px; color: var(--primary); margin-bottom: 20px; display: block; }
+        .project-card h3 { margin-bottom: 12px; }
+        .project-card p { color: #94a3b8; font-size: 15px; line-height: 1.6; }
+
+        /* Gallery */
+        .gallery { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:15px; }
+        .gallery img { width:100%; height:280px; object-fit:cover; border-radius:15px; cursor:pointer; transition: 0.4s; border: 1px solid transparent; }
+        .gallery img:hover { transform: scale(1.03); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        [dir="rtl"] { text-align: right; }
+        [dir="rtl"] .hero, [dir="rtl"] .section-title { text-align: center; }
+    </style>
 </head>
 <body>
 
-<!-- شاشة اختيار اللغة -->
+<div id="cursor-blur"></div>
+
 <div id="language-overlay">
-    <h1 style="color:white;">Select Language / اختر اللغة</h1>
-    <button class="lang-btn" onclick="setLang('en')">English</button>
-    <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+    <h1 style="margin-bottom:20px;">Abdallah Mohammed</h1>
+    <button class="lang-btn" onclick="setLang('en')">Review Portfolio</button>
+    <button class="lang-btn" onclick="setLang('ar')">تصفح معرض الأعمال</button>
 </div>
 
-<!-- الهيرو سيكشن -->
 <div class="hero">
-    <canvas id="particles"></canvas>
-    <img src="photo1.jpg" class="profile" id="profile" onclick="openLightbox(this.src)">
+    <canvas id="bg-canvas"></canvas>
+    <div class="profile-container">
+        <img src="photo1.jpg" class="profile" onclick="openLightbox(this.src)" alt="Abdallah Profile">
+    </div>
+    
     <h1 id="hero-title">Abdallah Mohammed</h1>
     <div id="typing"></div>
-    <p id="hero-subtitle">Software Engineer & Python Maestro. I craft stunning, interactive, and responsive websites.</p>
-
-    <!-- أزرار التواصل مع رسالة جاهزة -->
+    
     <div class="social-buttons">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=abdomohammed02006@gmail.com&su=مرحبًا&body=أزيك يا بشمهندس عبد الله!" 
-           target="_blank" rel="noopener" class="social-btn email">
-            <i class="fas fa-envelope"></i> <span class="btn-text">Email</span>
-        </a>
-        <a href="https://wa.me/201114698117?text=أزيك يا بشمهندس عبد الله!" 
-           target="_blank" rel="noopener" class="social-btn whatsapp">
-            <i class="fab fa-whatsapp"></i> <span class="btn-text">WhatsApp</span>
-        </a>
-        <a href="https://www.facebook.com/share/1Ghb6NWYQc/" target="_blank" rel="noopener" class="social-btn fb">
-            <i class="fab fa-facebook-f"></i> <span class="btn-text">Facebook</span>
-        </a>
-        <a href="https://www.instagram.com/leader200006/" target="_blank" rel="noopener" class="social-btn insta">
-            <i class="fab fa-instagram"></i> <span class="btn-text">Instagram</span>
-        </a>
-        <a href="https://www.tiktok.com/@abdo.6.12.2006" target="_blank" rel="noopener" class="social-btn tiktok">
-            <i class="fab fa-tiktok"></i> <span class="btn-text">TikTok</span>
-        </a>
+        <a id="mail-link" href="#" target="_blank" class="social-btn email"><i class="fas fa-envelope"></i> Email</a>
+        <a id="wa-link" href="#" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://www.facebook.com/share/1Ghb6NWYQc/" target="_blank" class="social-btn facebook"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="https://www.instagram.com/leader200006/" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="https://www.tiktok.com/@abdo.6.12.2006" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
     </div>
 </div>
 
-<!-- قسم عنّي -->
-<div class="section" id="about-me">
-    <h2 style="color:#60a5fa;">About Me / عني</h2>
-    <p style="color:#94a3b8; max-width:800px; margin:auto; line-height:1.6; margin-top:20px;">
-        أنا عبد الله محمد، مهندس برمجيات ومطور بايثون محترف. لدي خبرة في تطوير مواقع وتطبيقات تفاعلية باستخدام 
-        <strong>Python, Django, Flask, HTML, CSS, JavaScript</strong>، وأقوم بإنشاء مشاريع ويب متكاملة تلبي احتياجات العملاء. 
-        أحب التعلم المستمر وتجربة التقنيات الحديثة، وأسعى دائمًا لتقديم حلول برمجية فعالة ومبتكرة.
-    </p>
-    <p style="color:#94a3b8; max-width:800px; margin:auto; line-height:1.6; margin-top:10px;">
-        بعض المشاريع التي عملت عليها تشمل: 
-        <ul style="text-align:left; max-width:500px; margin:auto; margin-top:10px;">
-            <li>تطبيق ويب لإدارة المهام باستخدام Python وFlask</li>
-            <li>موقع تفاعلي للتجارة الإلكترونية باستخدام Django</li>
-            <li>أدوات تحليل بيانات ومخططات باستخدام Python وPandas</li>
-            <li>مواقع شخصية ومحافظ أعمال للزبائن باستخدام HTML وCSS وJavaScript</li>
-        </ul>
-    </p>
+<div class="section">
+    <h2 class="section-title" id="about-title">Software Engineer</h2>
+    <p id="about-text" style="text-align: center; line-height: 1.9; color: #cbd5e1; max-width: 850px; margin: auto; font-size: 17px;"></p>
 </div>
 
-<!-- المعرض -->
 <div class="section">
-    <h2 id="gallery-title" style="color:#60a5fa;">My Gallery</h2>
+    <h2 class="section-title" id="projects-title">My Projects</h2>
+    <div class="projects-grid" id="projects-container"></div>
+</div>
+
+<div class="section">
+    <h2 class="section-title" id="gallery-title">Gallery</h2>
     <div class="gallery">
-        <img src="photo2.jpg" onclick="openLightbox(this.src)">
-        <img src="photo3.jpg" onclick="openLightbox(this.src)">
-        <img src="photo4.jpg" onclick="openLightbox(this.src)">
-        <img src="photo5.jpg" onclick="openLightbox(this.src)">
-        <img src="photo6.jpg" onclick="openLightbox(this.src)">
-        <img src="photo7.jpg" onclick="openLightbox(this.src)">
-        <img src="photo8.jpg" onclick="openLightbox(this.src)">
-        <img src="photo9.jpg" onclick="openLightbox(this.src)">
+        <script>
+            for(let i=1; i<=9; i++) {
+                document.write(`<img src="photo${i}.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/400x400/020617/2563eb?text=Work+${i}'">`);
+            }
+        </script>
     </div>
 </div>
 
@@ -128,80 +136,119 @@ h1 { font-size:clamp(32px, 8vw, 55px); color:#60a5fa; margin-top:20px; }
 const content = {
     en: {
         title: "Abdallah Mohammed",
-        subtitle: "Software Engineer & Python Maestro. I craft stunning, interactive, and responsive websites.",
-        gallery: "My Gallery",
-        links: ["Email", "WhatsApp", "Facebook", "Instagram", "TikTok"],
-        typing: ["Python Developer", "Software Engineer", "Web Expert"]
+        typing: ["// Software Engineer", "// Python Expert", "// Web Developer", "// System Architect"],
+        about: "I am Abdallah Mohammed, a professional Software Engineer. I specialize in crafting robust web ecosystems using Python, Django, and Flask. My focus is on writing high-quality code that solves complex real-world problems.",
+        projectsTitle: "Technical Portfolio",
+        waMsg: "Hello Engineer Abdallah, I'm interested in your programming services!",
+        projects: [
+            {t: "Task Flow", d: "A smart task management system built with Flask and Python.", i: "fa-code-branch"},
+            {t: "E-Commerce", d: "Advanced online store architecture powered by Django.", i: "fa-cart-shopping"},
+            {t: "Data Vision", d: "Analytical tools for data processing using Pandas & Matplotlib.", i: "fa-chart-line"},
+            {t: "Creative Web", d: "Interactive portfolios and business sites with modern UI/UX.", i: "fa-display"}
+        ]
     },
     ar: {
         title: "عبد الله محمد",
-        subtitle: "مهندس برمجيات ومطور بايثون محترف. أصنع مواقع مذهلة وتفاعلية تلبي احتياجات سوق العمل.",
-        gallery: "معرض الصور",
-        links: ["البريد", "واتساب", "فيسبوك", "إنستجرام", "تيك توك"],
-        typing: ["مطور بايثون", "مهندس برمجيات", "خبير تطوير ويب"]
+        typing: ["// مهندس برمجيات", "// خبير بايثون", "// مطور ويب", "// معماري أنظمة"],
+        about: "أنا عبد الله محمد، مهندس برمجيات محترف. متخصص في بناء أنظمة الويب المتكاملة باستخدام لغة بايثون وإطارات عمل ديجانجو وفلاسك. شغفي هو كتابة كود نظيف وحلول برمجية ذكية تلبي طموحاتك.",
+        projectsTitle: "مشاريعي البرمجية",
+        waMsg: "أهلاً يا بشمهندس عبد الله، كنت حابب أستفسر عن خدماتك البرمجية!",
+        projects: [
+            {t: "نظام إدارة المهام", d: "تطبيق ويب ذكي لتنظيم العمل تم بناؤه باستخدام بايثون وفلاسك.", i: "fa-code-branch"},
+            {t: "متجر إلكتروني", d: "بناء متاجر إلكترونية احترافية وقابلة للتوسع باستخدام ديجانجو.", i: "fa-cart-shopping"},
+            {t: "تحليل البيانات", d: "أدوات مخصصة لمعالجة وتمثيل البيانات باستخدام مكتبات بايثون.", i: "fa-chart-line"},
+            {t: "مواقع إبداعية", d: "تصميم واجهات مستخدم تفاعلية وعصرية تناسب كافة الأعمال.", i: "fa-display"}
+        ]
     }
 };
 
-let typeInterval;
+const blur = document.getElementById("cursor-blur");
+window.addEventListener("mousemove", (e) => {
+    blur.style.left = e.clientX + "px";
+    blur.style.top = e.clientY + "px";
+});
 
 function setLang(lang) {
     document.getElementById("language-overlay").style.display = "none";
     document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.getElementById("hero-title").innerText = content[lang].title;
-    document.getElementById("hero-subtitle").innerText = content[lang].subtitle;
-    document.getElementById("gallery-title").innerText = content[lang].gallery;
-    const btns = document.querySelectorAll(".btn-text");
-    btns.forEach((btn, i) => btn.innerText = content[lang].links[i]);
-    clearTimeout(typeInterval);
+    document.getElementById("about-text").innerText = content[lang].about;
+    document.getElementById("projects-title").innerText = content[lang].projectsTitle;
+    document.getElementById("wa-link").href = `https://wa.me/201114698117?text=${encodeURIComponent(content[lang].waMsg)}`;
+    document.getElementById("mail-link").href = `mailto:abdomohammed02006@gmail.com`;
+
+    const pContainer = document.getElementById("projects-container");
+    pContainer.innerHTML = content[lang].projects.map(p => `
+        <div class="project-card">
+            <i class="fas ${p.i}"></i>
+            <h3>${p.t}</h3>
+            <p>${p.d}</p>
+        </div>
+    `).join('');
+
     startTyping(lang);
 }
 
+// Matrix Background Effect
+const canvas = document.getElementById("bg-canvas");
+const ctx = canvas.getContext("2d");
+let cw, ch, columns;
+const charStack = "def class if return import print(x) for i in range:".split("");
+const drops = [];
+
+function initCanvas() {
+    cw = canvas.width = window.innerWidth;
+    ch = canvas.height = window.innerHeight;
+    columns = cw / 20;
+    for(let i=0; i<columns; i++) drops[i] = 1;
+}
+
+function drawMatrix() {
+    ctx.fillStyle = "rgba(2, 6, 23, 0.08)";
+    ctx.fillRect(0,0,cw,ch);
+    ctx.fillStyle = "#2563eb";
+    ctx.font = "14px monospace";
+    for(let i=0; i<drops.length; i++) {
+        const text = charStack[Math.floor(Math.random()*charStack.length)];
+        ctx.fillText(text, i*20, drops[i]*20);
+        if(drops[i]*20 > ch && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+    }
+}
+setInterval(drawMatrix, 50);
+window.addEventListener("resize", initCanvas);
+initCanvas();
+
+let typingTimeout;
 function startTyping(lang) {
     let wordIdx = 0, charIdx = 0, isDeleting = false;
     const target = document.getElementById("typing");
     const words = content[lang].typing;
-
     function type() {
         const currentWord = words[wordIdx];
-        target.innerText = isDeleting ? currentWord.substring(0, charIdx--) : currentWord.substring(0, charIdx++);
-        let speed = isDeleting ? 50 : 150;
-        if (!isDeleting && charIdx > currentWord.length) { isDeleting = true; speed = 2000; }
-        else if (isDeleting && charIdx < 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; charIdx = 0; speed = 500; }
-        typeInterval = setTimeout(type, speed);
+        target.innerText = currentWord.substring(0, isDeleting ? charIdx - 1 : charIdx + 1);
+        charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
+        let speed = isDeleting ? 40 : 100;
+        if (!isDeleting && charIdx === currentWord.length) { isDeleting = true; speed = 2000; }
+        else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; speed = 500; }
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(type, speed);
     }
     type();
 }
 
-// نظام الجزيئات
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-let particles = [];
-function init() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    particles = [];
-    for(let i=0;i<70;i++){
-        particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,dx:(Math.random()-0.5),dy:(Math.random()-0.5)});
-    }
-}
-function animate() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="#2563eb";
-        ctx.fill();
-        p.x+=p.dx; p.y+=p.dy;
-        if(p.x<0||p.x>canvas.width)p.dx*=-1;
-        if(p.y<0||p.y>canvas.height)p.dy*=-1;
-    });
-    requestAnimationFrame(animate);
-}
-window.onresize = ()=>{init(); animate();};
-init(); animate();
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
-// Lightbox للصور
-function openLightbox(src){
+function openLightbox(src) {
     const box = document.createElement("div");
-    box.style="position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:10000; display:flex; align-items:center; justify-content:center;";
-    box.inner
+    box.style = "position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:10000; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(5px);";
+    box.innerHTML = `<img src="${src}" style="max-width:90%; max-height:85%; border:2px solid var(--primary); border-radius:15px; box-shadow: 0 0 50px rgba(37,99,235,0.3);">`;
+    box.onclick = () => box.remove();
+    document.body.appendChild(box);
+}
+</script>
+</body>
+</html>
