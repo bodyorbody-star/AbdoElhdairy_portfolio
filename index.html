@@ -59,7 +59,7 @@ h2{margin-bottom:25px;color:#60a5fa;text-shadow:0 0 10px #2563eb,0 0 20px #2563e
 <div class="hero">
 <canvas id="particles"></canvas>
 <canvas id="trail"></canvas>
-<img src="photo1.jpg" class="profile" id="profile">
+<img src="images/photo1.jpg" class="profile" id="profile">
 <h1 id="hero-title">Abdallah Mohammed</h1>
 <h2 id="typing"></h2>
 <p id="hero-subtitle">I’m Abdallah Mohammed, a visionary Software Engineer and Python Maestro. I craft stunning, interactive, and responsive websites that elevate businesses, restaurants, and personal projects to a whole new level. With a relentless passion for programming and problem-solving, I turn ideas into elegant digital realities, blending creativity, precision, and innovation.</p>
@@ -87,14 +87,14 @@ h2{margin-bottom:25px;color:#60a5fa;text-shadow:0 0 10px #2563eb,0 0 20px #2563e
 <div class="section">
 <h2>My Gallery</h2>
 <div class="gallery">
-<img src="photo2.jpg">
-<img src="photo3.jpg">
-<img src="photo4.jpg">
-<img src="photo5.jpg">
-<img src="photo6.jpg">
-<img src="photo7.jpg">
-<img src="photo8.jpg">
-<img src="photo9.jpg">
+<img src="images/photo2.jpg">
+<img src="images/photo3.jpg">
+<img src="images/photo4.jpg">
+<img src="images/photo5.jpg">
+<img src="images/photo6.jpg">
+<img src="images/photo7.jpg">
+<img src="images/photo8.jpg">
+<img src="images/photo9.jpg">
 </div>
 </div>
 
@@ -108,18 +108,9 @@ type();
 document.querySelectorAll(".gallery img").forEach(img=>{
   img.onclick=function(){
     let popup=document.createElement("div");
-    popup.style.position="fixed";
-    popup.style.inset="0";
-    popup.style.background="rgba(0,0,0,0.95)";
-    popup.style.display="flex";
-    popup.style.alignItems="center";
-    popup.style.justifyContent="center";
-    popup.style.cursor="pointer";
-    let big=document.createElement("img");
-    big.src=this.src;
-    big.style.maxWidth="90%";
-    big.style.maxHeight="90%";
-    big.style.borderRadius="10px";
+    popup.style.position="fixed"; popup.style.inset="0"; popup.style.background="rgba(0,0,0,0.95)";
+    popup.style.display="flex"; popup.style.alignItems="center"; popup.style.justifyContent="center"; popup.style.cursor="pointer";
+    let big=document.createElement("img"); big.src=this.src; big.style.maxWidth="90%"; big.style.maxHeight="90%"; big.style.borderRadius="10px";
     popup.appendChild(big);
     popup.onclick=function(){popup.remove();};
     document.body.appendChild(popup);
@@ -129,41 +120,32 @@ document.querySelectorAll(".gallery img").forEach(img=>{
 // Profile fullscreen
 document.getElementById("profile").onclick=function(){
   let popup=document.createElement("div");
-  popup.style.position="fixed";
-  popup.style.inset="0";
-  popup.style.background="rgba(0,0,0,0.95)";
-  popup.style.display="flex";
-  popup.style.alignItems="center";
-  popup.style.justifyContent="center";
-  popup.style.cursor="pointer";
-  let big=document.createElement("img");
-  big.src=this.src;
-  big.style.maxWidth="90%";
-  big.style.maxHeight="90%";
-  big.style.borderRadius="10px";
+  popup.style.position="fixed"; popup.style.inset="0"; popup.style.background="rgba(0,0,0,0.95)";
+  popup.style.display="flex"; popup.style.alignItems="center"; popup.style.justifyContent="center"; popup.style.cursor="pointer";
+  let big=document.createElement("img"); big.src=this.src; big.style.maxWidth="90%"; big.style.maxHeight="90%"; big.style.borderRadius="10px";
   popup.appendChild(big);
   popup.onclick=function(){popup.remove();};
   document.body.appendChild(popup);
 };
 
 // Particles
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");let W,H;
+const canvas=document.getElementById("particles"); const ctx=canvas.getContext("2d"); let W,H;
 function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-window.addEventListener("resize",resize);resize();
+window.addEventListener("resize",resize); resize();
 const particles=[];
 for(let i=0;i<150;i++){particles.push({x:Math.random()*W,y:Math.random()*H,radius:Math.random()*2+1,dx:(Math.random()-0.5)*2,dy:(Math.random()-0.5)*2});}
 function draw(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);ctx.fillStyle="rgba(37,99,235,0.7)";ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>W)p.dx*=-1;if(p.y<0||p.y>H)p.dy*=-1;});requestAnimationFrame(draw);}
 draw();
 
 // Neon Cursor Trail
-const trailCanvas=document.getElementById("trail");
-const tctx=trailCanvas.getContext("2d");
+const trailCanvas=document.getElementById("trail"); const tctx=trailCanvas.getContext("2d");
 trailCanvas.width=window.innerWidth; trailCanvas.height=window.innerHeight;
 let trailParticles=[];
 window.addEventListener("resize",()=>{trailCanvas.width=window.innerWidth;trailCanvas.height=window.innerHeight;});
 document.addEventListener("mousemove",e=>{trailParticles.push({x:e.clientX,y:e.clientY,alpha:1});});
-function drawTrail(){tctx.clearRect(0,0,trailCanvas.width,trailCanvas.height);trailParticles.forEach((p,i)=>{tctx.fillStyle=`rgba(37,99,235,${p.alpha})`;tctx.beginPath();tctx.arc(p.x,p.y,8,0,Math.PI*2);tctx.fill();p.alpha-=0.03;if(p.alpha<=0) trailParticles.splice(i,1);});requestAnimationFrame(drawTrail);}
+function drawTrail(){tctx.clearRect(0,0,trailCanvas.width,trailCanvas.height);
+trailParticles.forEach((p,i)=>{tctx.fillStyle=`rgba(37,99,235,${p.alpha})`; tctx.beginPath(); tctx.arc(p.x,p.y,8,0,Math.PI*2); tctx.fill(); p.alpha-=0.03; if(p.alpha<=0) trailParticles.splice(i,1);});
+requestAnimationFrame(drawTrail);}
 drawTrail();
 
 // 3D profile hover
